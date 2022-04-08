@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.studentreport.dao.StudentClassDao">
+
+    <resultMap type="edu.studentreport.entity.StudentClass" id="StudentClassMap">
+        <result property="className" column="class_name" jdbcType="VARCHAR"/>
+        <result property="classTeacher" column="class_teacher" jdbcType="VARCHAR"/>
+        <result property="collegeId" column="college_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentClassMap">
+        select class_name,
+               class_teacher,
+               college_id
+        from student_class
+        where class_name = #{className}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StudentClassMap">
+        select
+        class_name, class_teacher, college_id
+        from student_class
+        <where>
+            <if test="className != null and className != ''">
+                and class_name = #{className}
+            </if>
+            <if test="classTeacher != null and classTeacher != ''">
+                and class_teacher = #{classTeacher}
+            </if>
+            <if test="collegeId != null">
+                and college_id = #{collegeId}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from student_class
+        <where>
+            <if test="className != null and className != ''">
+                and class_name = #{className}
+            </if>
+            <if test="classTeacher != null and classTeacher != ''">
+                and class_teacher = #{classTeacher}
+            </if>
+            <if test="collegeId != null">
+                and college_id = #{collegeId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="className" useGeneratedKeys="true">
+        insert into student_class(class_name, class_teacher, college_id)
+        values (#{className}, #{classTeacher}, #{collegeId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="className" useGeneratedKeys="true">
+        insert into student_class(class_name, class_teacher, college_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.className}, #{entity.classTeacher}, #{entity.collegeId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="className" useGeneratedKeys="true">
+        insert into student_class(class_name, class_teacher, college_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.className}, #{entity.classTeacher}, #{entity.collegeId})
+        </foreach>
+        on duplicate key update
+        class_name = values(class_name),
+        class_teacher = values(class_teacher),
+        college_id = values(college_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update student_class
+        <set>
+            <if test="classTeacher != null and classTeacher != ''">
+                class_teacher = #{classTeacher},
+            </if>
+            <if test="collegeId != null">
+                college_id = #{collegeId},
+            </if>
+        </set>
+        where class_name = #{className}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from student_class
+        where class_name = #{className}
+    </delete>
+
+</mapper>
+
