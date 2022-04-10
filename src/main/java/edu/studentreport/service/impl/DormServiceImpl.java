@@ -6,6 +6,7 @@ import edu.studentreport.service.DormService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 宿舍(Dorm)表服务实现类
@@ -17,6 +18,15 @@ import javax.annotation.Resource;
 public class DormServiceImpl implements DormService {
     @Resource
     private DormDao dormDao;
+
+    /**
+     * 查找所有
+     * @return
+     */
+    @Override
+    public List<Dorm> queryAll() {
+        return this.dormDao.queryAll();
+    }
 
     /**
      * 通过ID查询单条数据

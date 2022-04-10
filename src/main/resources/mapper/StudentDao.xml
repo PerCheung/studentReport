@@ -15,6 +15,38 @@
         <result property="className" column="class_name" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <!--查询所有-->
+    <select id="queryAll" resultMap="StudentMap">
+        select student_id,
+               student_password,
+               student_name,
+               student_sex,
+               student_tel,
+               student_email,
+               student_cid,
+               is_pay,
+               dorm_id,
+               class_name
+        from student
+    </select>
+
+    <!--查询所有已缴费且无宿舍的学生-->
+    <select id="queryAllisPay" resultMap="StudentMap">
+        select student_id,
+               student_password,
+               student_name,
+               student_sex,
+               student_tel,
+               student_email,
+               student_cid,
+               is_pay,
+               dorm_id,
+               class_name
+        from student
+        where is_pay = 1
+          and dorm_id = 0
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="StudentMap">
         select student_id,
@@ -30,6 +62,14 @@
         from student
         where student_id = #{studentId}
     </select>
+
+    <!--查询班级内最大学号-->
+    <select id="queryMaxByClassName" resultType="java.lang.Long">
+        select max(student_id)
+        from student
+        where class_name = #{className}
+    </select>
+
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="StudentMap">

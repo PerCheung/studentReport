@@ -2,6 +2,7 @@ package edu.studentreport.controller;
 
 import edu.studentreport.entity.College;
 import edu.studentreport.service.CollegeService;
+import edu.studentreport.util.R;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +15,24 @@ import javax.annotation.Resource;
  * @since 2022-04-08 19:52:29
  */
 @RestController
-@RequestMapping("admin/college")
+@RequestMapping("college")
+@CrossOrigin(origins = "*")
 public class CollegeController {
     /**
      * 服务对象
      */
     @Resource
     private CollegeService collegeService;
+
+    /**
+     * 查找所有
+     *
+     * @return
+     */
+    @GetMapping("all")
+    public R queryAll() {
+        return R.ok().setData(this.collegeService.queryAll());
+    }
 
     /**
      * 通过主键查询单条数据

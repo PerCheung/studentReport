@@ -14,6 +14,11 @@ import java.util.List;
 public interface StudentClassDao {
 
     /**
+     * 查询所有
+     */
+    List<StudentClass> queryAll();
+
+    /**
      * 通过ID查询单条数据
      *
      * @param className 主键

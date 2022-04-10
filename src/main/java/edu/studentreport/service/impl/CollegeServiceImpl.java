@@ -6,6 +6,7 @@ import edu.studentreport.service.CollegeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 学院(College)表服务实现类
@@ -17,6 +18,15 @@ import javax.annotation.Resource;
 public class CollegeServiceImpl implements CollegeService {
     @Resource
     private CollegeDao collegeDao;
+
+    /**
+     * 查找所有
+     * @return
+     */
+    @Override
+    public List<College> queryAll() {
+        return this.collegeDao.queryAll();
+    }
 
     /**
      * 通过ID查询单条数据

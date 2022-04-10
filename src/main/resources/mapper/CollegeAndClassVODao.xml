@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.studentreport.dao.CollegeAndClassVODao">
+
+    <resultMap type="edu.studentreport.vo.CollegeAndClassVO" id="CollegeAndClassVOMap">
+        <result property="collegeName" column="college_name" jdbcType="VARCHAR"/>
+        <result property="collegeTeacher" column="college_teacher" jdbcType="VARCHAR"/>
+        <result property="className" column="class_name" jdbcType="VARCHAR"/>
+        <result property="classTeacher" column="class_teacher" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryAll" resultMap="CollegeAndClassVOMap">
+        select s.class_name, s.class_teacher, c.college_name, c.college_teacher
+        from college c,
+             student_class s
+        where c.college_id = s.college_id;
+    </select>
+</mapper>

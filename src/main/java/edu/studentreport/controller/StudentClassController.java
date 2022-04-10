@@ -2,6 +2,7 @@ package edu.studentreport.controller;
 
 import edu.studentreport.entity.StudentClass;
 import edu.studentreport.service.StudentClassService;
+import edu.studentreport.util.R;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +15,32 @@ import javax.annotation.Resource;
  * @since 2022-04-08 19:52:29
  */
 @RestController
-@RequestMapping("admin/studentClass")
+@RequestMapping("studentClass")
+@CrossOrigin(origins = "*")
 public class StudentClassController {
     /**
      * 服务对象
      */
     @Resource
     private StudentClassService studentClassService;
+
+    /**
+     * 查找所有班级及所属学院
+     *
+     * @return
+     */
+    @GetMapping("all")
+    public R queryAll() {
+        return R.ok().setData(this.studentClassService.queryCCAll());
+    }
+
+    /**
+     * 查找所有班级
+     */
+    @GetMapping("/class/all")
+    public R queryAllClass() {
+        return R.ok().setData(this.studentClassService.queryAll());
+    }
 
     /**
      * 通过主键查询单条数据

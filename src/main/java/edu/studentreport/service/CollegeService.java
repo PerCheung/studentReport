@@ -2,6 +2,8 @@ package edu.studentreport.service;
 
 import edu.studentreport.entity.College;
 
+import java.util.List;
+
 /**
  * 学院(College)表服务接口
  *
@@ -9,6 +11,11 @@ import edu.studentreport.entity.College;
  * @since 2022-04-08 19:52:29
  */
 public interface CollegeService {
+
+    /**
+     * 查询所有
+     */
+    List<College> queryAll();
 
     /**
      * 通过ID查询单条数据

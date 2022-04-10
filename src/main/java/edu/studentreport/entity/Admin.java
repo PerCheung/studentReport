@@ -22,7 +22,30 @@ public class Admin implements Serializable {
      * 管理员密码
      */
     private String adminPassword;
+    /**
+     * 注册验证码
+     */
+    private String code;
+    /**
+     * 新密码
+     */
+    private String newPassword;
 
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public Integer getAdminId() {
         return adminId;
@@ -47,6 +70,4 @@ public class Admin implements Serializable {
     public void setAdminPassword(String adminPassword) {
         this.adminPassword = adminPassword;
     }
-
 }
-

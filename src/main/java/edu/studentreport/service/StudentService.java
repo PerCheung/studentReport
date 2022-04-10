@@ -2,6 +2,8 @@ package edu.studentreport.service;
 
 import edu.studentreport.entity.Student;
 
+import java.util.List;
+
 /**
  * 学生(Student)表服务接口
  *
@@ -9,6 +11,26 @@ import edu.studentreport.entity.Student;
  * @since 2022-04-08 19:52:29
  */
 public interface StudentService {
+
+    /**
+     * 查询所有
+     */
+    List<Student> queryAll();
+
+    /**
+     * 查询所有已缴费学生
+     */
+    List<Student> queryAllisPay();
+
+    /**
+     * 登录
+     */
+    int loginStudent(Student student);
+
+    /**
+     * 通过班级名查找最大学号
+     */
+    long queryMaxByClassName(String className);
 
     /**
      * 通过ID查询单条数据

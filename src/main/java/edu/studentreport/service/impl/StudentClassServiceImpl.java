@@ -1,11 +1,14 @@
 package edu.studentreport.service.impl;
 
+import edu.studentreport.dao.CollegeAndClassVODao;
 import edu.studentreport.dao.StudentClassDao;
 import edu.studentreport.entity.StudentClass;
 import edu.studentreport.service.StudentClassService;
+import edu.studentreport.vo.CollegeAndClassVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 班级(StudentClass)表服务实现类
@@ -17,6 +20,26 @@ import javax.annotation.Resource;
 public class StudentClassServiceImpl implements StudentClassService {
     @Resource
     private StudentClassDao studentClassDao;
+
+    @Resource
+    private CollegeAndClassVODao collegeAndClassVODao;
+
+    /**
+     * 查询班级和学院所有信息
+     */
+    @Override
+    public List<CollegeAndClassVO> queryCCAll() {
+        return this.collegeAndClassVODao.queryAll();
+    }
+
+    /**
+     * 查找所有
+     * @return
+     */
+    @Override
+    public List<StudentClass> queryAll() {
+        return this.studentClassDao.queryAll();
+    }
 
     /**
      * 通过ID查询单条数据

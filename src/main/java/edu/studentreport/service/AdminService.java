@@ -19,6 +19,16 @@ public interface AdminService {
     Admin queryById(Integer adminId);
 
     /**
+     * 通过用户名查找密码
+     */
+    String queryByAdminUsername(String adminUsername);
+
+    /**
+     * 登录
+     */
+    int loginAdmin(Admin admin);
+
+    /**
      * 新增数据
      *
      * @param admin 实例对象
@@ -27,12 +37,12 @@ public interface AdminService {
     Admin insert(Admin admin);
 
     /**
-     * 修改数据
+     * 修改密码
      *
      * @param admin 实例对象
      * @return 实例对象
      */
-    Admin update(Admin admin);
+    String update(Admin admin);
 
     /**
      * 通过主键删除数据

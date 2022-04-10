@@ -8,6 +8,14 @@
         <result property="collegeTeacher" column="college_teacher" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <!--查询所有-->
+    <select id="queryAll" resultMap="CollegeMap">
+        select college_id,
+               college_name,
+               college_teacher
+        from college
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="CollegeMap">
         select college_id,

@@ -22,6 +22,11 @@ public interface AdminDao {
     Admin queryById(Integer adminId);
 
     /**
+     * 通过用户名查找密码
+     */
+    String queryByAdminUsername(String adminUsername);
+
+    /**
      * 统计总行数
      *
      * @param admin 查询条件
@@ -61,6 +66,14 @@ public interface AdminDao {
      * @return 影响行数
      */
     int update(Admin admin);
+
+    /**
+     * 通过用户名修改数据
+     *
+     * @param admin 实例对象
+     * @return 影响行数
+     */
+    int updateByUser(Admin admin);
 
     /**
      * 通过主键删除数据

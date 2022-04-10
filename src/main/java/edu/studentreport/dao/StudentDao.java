@@ -14,12 +14,28 @@ import java.util.List;
 public interface StudentDao {
 
     /**
+     * 查询所有
+     */
+    List<Student> queryAll();
+
+    /**
+     * 查询所有已缴费学生
+     */
+    List<Student> queryAllisPay();
+
+
+    /**
      * 通过ID查询单条数据
      *
      * @param studentId 主键
      * @return 实例对象
      */
     Student queryById(Integer studentId);
+
+    /**
+     * 通过班级名查找最大学号
+     */
+    long queryMaxByClassName(String className);
 
     /**
      * 统计总行数

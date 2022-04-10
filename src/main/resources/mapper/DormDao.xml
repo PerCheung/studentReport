@@ -7,6 +7,13 @@
         <result property="dormLocation" column="dorm_location" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <!--查询所有-->
+    <select id="queryAll" resultMap="DormMap">
+        select dorm_id,
+               dorm_location
+        from dorm
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="DormMap">
         select dorm_id,

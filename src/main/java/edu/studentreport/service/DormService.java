@@ -2,6 +2,8 @@ package edu.studentreport.service;
 
 import edu.studentreport.entity.Dorm;
 
+import java.util.List;
+
 /**
  * 宿舍(Dorm)表服务接口
  *
@@ -9,6 +11,11 @@ import edu.studentreport.entity.Dorm;
  * @since 2022-04-08 19:52:29
  */
 public interface DormService {
+
+    /**
+     * 查询所有
+     */
+    List<Dorm> queryAll();
 
     /**
      * 通过ID查询单条数据

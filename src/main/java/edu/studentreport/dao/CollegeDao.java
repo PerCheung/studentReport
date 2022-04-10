@@ -14,6 +14,11 @@ import java.util.List;
 public interface CollegeDao {
 
     /**
+     * 查询所有
+     */
+    List<College> queryAll();
+
+    /**
      * 通过ID查询单条数据
      *
      * @param collegeId 主键

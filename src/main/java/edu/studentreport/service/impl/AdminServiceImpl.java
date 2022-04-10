@@ -3,6 +3,7 @@ package edu.studentreport.service.impl;
 import edu.studentreport.dao.AdminDao;
 import edu.studentreport.entity.Admin;
 import edu.studentreport.service.AdminService;
+import edu.studentreport.util.MD5Util;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,6 +31,29 @@ public class AdminServiceImpl implements AdminService {
     }
 
     /**
+     * 通过用户名查找密码
+     */
+    @Override
+    public String queryByAdminUsername(String adminUsername) {
+        return this.adminDao.queryByAdminUsername(adminUsername);
+    }
+
+    /**
+     * 登录
+     */
+    @Override
+    public int loginAdmin(Admin admin) {
+        String password = queryByAdminUsername(admin.getAdminUsername());
+        if (password == null) {
+            return 0;
+        }
+        if (password.equals(MD5Util.toMd5(admin.getAdminPassword()))) {
+            return 1;
+        }
+        return 2;
+    }
+
+    /**
      * 新增数据
      *
      * @param admin 实例对象
@@ -37,20 +61,22 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public Admin insert(Admin admin) {
+        admin.setAdminPassword(MD5Util.toMd5(admin.getAdminPassword()));
         this.adminDao.insert(admin);
         return admin;
     }
 
     /**
-     * 修改数据
+     * 修改密码
      *
      * @param admin 实例对象
      * @return 实例对象
      */
     @Override
-    public Admin update(Admin admin) {
-        this.adminDao.update(admin);
-        return this.queryById(admin.getAdminId());
+    public String update(Admin admin) {
+        admin.setAdminPassword(MD5Util.toMd5(admin.getNewPassword()));
+        this.adminDao.updateByUser(admin);
+        return this.queryByAdminUsername(admin.getAdminUsername());
     }
 
     /**

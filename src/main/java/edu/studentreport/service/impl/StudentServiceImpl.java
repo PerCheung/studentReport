@@ -6,6 +6,7 @@ import edu.studentreport.service.StudentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 学生(Student)表服务实现类
@@ -19,6 +20,45 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
 
     /**
+     * 查询所有
+     */
+    @Override
+    public List<Student> queryAll() {
+        return this.studentDao.queryAll();
+    }
+
+    /**
+     * 查询所有已缴费学生
+     */
+    @Override
+    public List<Student> queryAllisPay() {
+        return this.studentDao.queryAllisPay();
+    }
+
+    /**
+     * 登录
+     */
+    @Override
+    public int loginStudent(Student student) {
+        Student mysqlStudent = this.studentDao.queryById(student.getStudentId());
+        if (mysqlStudent == null) {
+            return 0;
+        }
+        if (mysqlStudent.getStudentPassword().equals(student.getStudentPassword())) {
+            return 1;
+        }
+        return 2;
+    }
+
+    /**
+     * 通过班级名查找最大学号
+     */
+    @Override
+    public long queryMaxByClassName(String className) {
+        return this.studentDao.queryMaxByClassName(className);
+    }
+
+    /**
      * 通过ID查询单条数据
      *
      * @param studentId 主键
@@ -28,6 +68,7 @@ public class StudentServiceImpl implements StudentService {
     public Student queryById(Integer studentId) {
         return this.studentDao.queryById(studentId);
     }
+
 
     /**
      * 新增数据

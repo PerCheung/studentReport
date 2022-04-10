@@ -14,6 +14,10 @@ import java.util.List;
 public interface DormDao {
 
     /**
+     * 查询所有
+     */
+    List<Dorm> queryAll();
+    /**
      * 通过ID查询单条数据
      *
      * @param dormId 主键
